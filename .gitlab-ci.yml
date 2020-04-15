@@ -1,0 +1,15 @@
+image: python:3.8
+
+stages:
+  - deploy
+
+production:
+  stage: deploy
+  before_script:
+    - brew update
+    - brew upgrade aws-sam-cli
+  script:
+    - sam build
+    - sam package --output-template-file packaged.yaml --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-1o09n05hnm35a
+    - sam deploy --template-file packaged.yaml --stack-name gitlab-example --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-1o09n05hnm35a --capabilities CAPABILITY_IAM --region eu-central-1
+  environment: production
