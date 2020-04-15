@@ -6,8 +6,8 @@ stages:
 production:
   stage: deploy
   before_script:
-    - brew update
-    - brew upgrade aws-sam-cli
+    - pip3 install awscli --upgrade
+    - pip3 install aws-sam-cli --upgrade
   script:
     - sam build
     - sam package --output-template-file packaged.yaml --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-1o09n05hnm35a
