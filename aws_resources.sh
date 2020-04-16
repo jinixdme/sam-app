@@ -13,7 +13,8 @@ bucket_exists () {
 create_bucket () {
   if [ -z $(bucket_exists $BUCKET_NAME) ]
   then
-    $(aws s3api create-bucket --bucket $BUCKET_NAME --region eu-central-1)
+    echo "Create bucket $BUCKET_NAME in region $AWS_DEFAULT_REGION"
+    $(aws s3api create-bucket --bucket $BUCKET_NAME --region $AWS_DEFAULT_REGION)
   else
     echo "Bucket $BUCKET_NAME exists"
   fi
