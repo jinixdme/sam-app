@@ -4,7 +4,6 @@ BUCKET_NAME=$1
 
 # Branch has to be protected
 export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-eu-central-1}
-. assume-role $AWS_ROLE
 
 bucket_exists () {
   status=$(aws s3 ls 2>&1 | grep $1)
