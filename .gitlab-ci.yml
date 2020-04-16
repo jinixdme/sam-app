@@ -9,7 +9,9 @@ production:
     - pip3 install awscli --upgrade
     - pip3 install aws-sam-cli --upgrade
   script:
+    - export BUCKET_NAME=jinixdme-gitlab-deploy
+    - ./aws_resources.sh $BUCKET_NAME
     - sam build
-    - sam package --output-template-file packaged.yaml --s3-bucket jinixdme-gitlab-deploy
-    - sam deploy --template-file packaged.yaml --stack-name sam-app --s3-bucket jinixdme-gitlab-deploy --capabilities CAPABILITY_IAM --region eu-central-1
+    - sam package --output-template-file packaged.yaml --s3-bucket $BUCKET_NAME
+    - sam deploy --template-file packaged.yaml --stack-name sam-app --s3-bucket $BUCKET_NAME --capabilities CAPABILITY_IAM --region eu-central-1
   environment: production
